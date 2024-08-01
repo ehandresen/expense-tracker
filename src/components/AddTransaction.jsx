@@ -26,7 +26,7 @@ const AddTransaction = () => {
           <input
             type="number"
             value={amount}
-            onChange={(e) => setAmount(parseInt(e.target.value))} // parseInt?
+            onChange={(e) => setAmount(e.target.value)}
             placeholder="Enter amount..."
           />
         </div>
