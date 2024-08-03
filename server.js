@@ -1,12 +1,14 @@
-import express from "express";
-import morgan from "morgan";
-import colors from "colors";
-
-import transactions from "./routes/transactions.js";
+import express from 'express';
+import morgan from 'morgan';
+import colors from 'colors';
+import transactions from './routes/transactions.js';
+import connectDB from './config/db.js';
 
 const app = express();
 
-app.use("/api/transactions", transactions);
+connectDB();
+
+app.use('/api/transactions', transactions);
 
 const PORT = process.env.PORT || 3000;
 
