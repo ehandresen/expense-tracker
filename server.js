@@ -2,9 +2,11 @@ import express from "express";
 import morgan from "morgan";
 import colors from "colors";
 
+import transactions from "./routes/transactions.js";
+
 const app = express();
 
-app.get("/", (req, res) => res.send({ msg: "Hello World" }));
+app.use("/api/transactions", transactions);
 
 const PORT = process.env.PORT || 3000;
 
