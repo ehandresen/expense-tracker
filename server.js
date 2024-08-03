@@ -4,7 +4,7 @@ import colors from "colors";
 
 const app = express();
 
-app.get("/", (req, res) => res.send("hello"));
+app.get("/", (req, res) => res.send({ msg: "Hello World" }));
 
 const PORT = process.env.PORT || 3000;
 
