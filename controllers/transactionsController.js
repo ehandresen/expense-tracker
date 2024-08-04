@@ -1,17 +1,34 @@
+import Transaction from '../models/Transaction.js';
+
 // @desc    Get all transactions
 // @route   GET /api/transactions
-export const getTransactions = (req, res, next) => {
-  res.send("GET transactions");
+export const getTransactions = async (req, res, next) => {
+  try {
+    const transactions = await Transaction.find();
+
+    return res.status(200).json({
+      success: true,
+      count: transactions.length,
+      data: transactions,
+    });
+  } catch (error) {
+    return res.send(500).json({
+      success: false,
+      error: 'Server error',
+    });
+  }
 };
 
 // @desc    Add transaction
 // @route   POST /api/transactions
-export const addTransactions = (req, res, next) => {
-  res.send("POST transactions");
+export const addTransactions = async (req, res, next) => {
+  try {
+    const transactions = await Transactions;
+  } catch (error) {}
 };
 
 // @desc    Delete transaction
 // @route   DELETE /api/transactions/:id
-export const deleteTransactions = (req, res, next) => {
-  res.send("DELETE transactions");
+export const deleteTransactions = async (req, res, next) => {
+  res.send('DELETE transactions');
 };
