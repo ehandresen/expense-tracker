@@ -23,11 +23,12 @@ export const getTransactions = async (req, res, next) => {
 // @route   POST /api/transactions
 export const addTransactions = async (req, res, next) => {
   try {
-    const text = req.body.text;
-    const amount = req.body.amount;
+    // const text = req.body.text;
+    // const amount = req.body.amount;
 
     const transaction = await Transaction.create(req.body);
 
+    // 201 created
     res.status(201).json({
       success: true,
       data: transaction,
@@ -36,12 +37,13 @@ export const addTransactions = async (req, res, next) => {
     if (error.name === 'ValidationError') {
       const messages = Object.values(error.errors).map((val) => val.message);
 
+      // 400 bad request
       return res.status(400).json({
         success: false,
         error: messages,
       });
     } else {
-      console.log(error);
+      // 500 server error
       return res.status(500).json({
         success: false,
         error: 'Server error',

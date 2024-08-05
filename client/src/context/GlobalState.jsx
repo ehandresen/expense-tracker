@@ -1,10 +1,13 @@
 // in larger apps u could have profileState, shopState etc
-import { createContext, useReducer } from "react";
-import AppReducer from "./AppReducer";
+import { createContext, useReducer } from 'react';
+import axios from 'axios';
+import AppReducer from './AppReducer';
 
 // Initial state
 const initialState = {
   transactions: [],
+  error: null, // can if u want show error messages within the app
+  loading: true,
 };
 
 // Create context
@@ -15,16 +18,32 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions
+  async function getTransactions() {
+    try {
+      const response = await axios.get('/api/transactions');
+
+      dispatch({
+        type: 'GET_TRANSACTIONS',
+        payload: response.data.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: 'TRANSACTION_ERROR',
+        payload: err.response.data.error,
+      });
+    }
+  }
+
   function deleteTransaction(id) {
     dispatch({
-      type: "DELETE_TRANSACTION",
+      type: 'DELETE_TRANSACTION',
       payload: id,
     });
   }
 
   function addTransaction(transaction) {
     dispatch({
-      type: "ADD_TRANSACTION",
+      type: 'ADD_TRANSACTION',
       payload: transaction,
     });
   }
