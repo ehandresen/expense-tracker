@@ -6,7 +6,12 @@ import connectDB from './config/db.js';
 
 const app = express();
 
+// body parser middleware
 app.use(express.json());
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 connectDB();
 

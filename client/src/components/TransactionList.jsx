@@ -1,9 +1,14 @@
-import { useContext } from "react";
-import { GlobalContext } from "../context/GlobalState";
-import Transaction from "./Transaction";
+import { useContext, useEffect } from 'react';
+import { GlobalContext } from '../context/GlobalState';
+import Transaction from './Transaction';
 
 const TransactionList = () => {
-  const { transactions } = useContext(GlobalContext); // destructuring transations, instead of writing context.transactions
+  const { transactions, getTransactions } = useContext(GlobalContext); // destructuring transactions, instead of writing context.transactions
+
+  useEffect(() => {
+    getTransactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
