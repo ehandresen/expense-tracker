@@ -65,13 +65,14 @@ export const deleteTransactions = async (req, res, next) => {
     }
 
     // id there is a transaction, remove it
-    await transaction.remove();
+    await Transaction.findByIdAndDelete(req.params.id);
 
     res.status(200).json({
       success: true,
       data: {}, // return empty object, could be something else
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       success: false,
       error: 'Server error',
