@@ -53,5 +53,28 @@ export const addTransactions = async (req, res, next) => {
 // @desc    Delete transaction
 // @route   DELETE /api/transactions/:id
 export const deleteTransactions = async (req, res, next) => {
-  res.send('DELETE transactions');
+  try {
+    const transaction = await Transaction.findById(req.params.id);
+
+    // if no transaction is found
+    if (!transaction) {
+      return res.status(404).json({
+        success: false,
+        error: `No transaction found with id ${req.params.id}`,
+      });
+    }
+
+    // id there is a transaction, remove it
+    await transaction.remove();
+
+    res.status(200).json({
+      success: true,
+      data: {}, // return empty object, could be something else
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Server error',
+    });
+  }
 };
