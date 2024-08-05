@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "test": "node server",
-    "server": "node --env-file config/config.env --watch server.js"
+    "server": "node --env-file config/config.env --watch server.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
