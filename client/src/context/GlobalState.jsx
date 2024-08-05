@@ -20,9 +20,11 @@ export const GlobalProvider = ({ children }) => {
   // Actions
   async function getTransactions() {
     try {
-      const response = await axios.get('http://localhost:5001/api/transactions');
+      const response = await axios.get(
+        'http://localhost:5001/api/transactions'
+      );
 
-      console.log(response);
+      console.log(response.data.data);
 
       dispatch({
         type: 'GET_TRANSACTIONS',
